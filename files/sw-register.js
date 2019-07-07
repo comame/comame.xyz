@@ -1,9 +1,6 @@
-if (navigator.serviceWorker) {
-    navigator.serviceWorker.register("./sw.js")
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistration().then(registration => {
+        registration && registration.unregister()
+        console.log('SW unregistered')
+    })
 }
-
-window.addEventListener("beforeinstallprompt", event => {
-    // Don't show install banner
-    event.preventDefault()
-    return false
-})
