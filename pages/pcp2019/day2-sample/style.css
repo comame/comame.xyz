@@ -1,0 +1,8 @@
+form span {
+    display: block;
+    margin-bottom: .5rem;
+}
+
+#list {
+    list-style: none;
+}

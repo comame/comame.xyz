@@ -1,0 +1,6 @@
+[user]
+	name = comame
+	email = dev@comame.xyz
+	signingKey = gpg-id
+[commit]
+	gpgSign = true

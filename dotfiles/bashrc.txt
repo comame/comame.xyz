@@ -1,0 +1,44 @@
+# Return if not interactive
+if [[ $- != *i* ]]; then return; fi
+
+
+function echo_red_string(){
+    echo -e '\033[0;31m'$1'\033[0;39m'
+}
+function break_line(){
+    echo ''
+}
+
+
+# Aliases
+
+alias l='ls -G'
+alias la='ls -aG'
+alias ll='ls -lG'
+alias lla='ls -laG'
+
+alias dc='docker-compose'
+alias kc='kubectl'
+
+
+# Bash keybinds
+
+bind '"\C-f": forward-word'
+bind '"\C-b": backward-word'
+
+
+# Disable default Ctrl-S behavior
+
+stty stop undef
+
+
+# Echo
+
+break_line
+echo 'C-p history'
+echo 'C-r C-s Search'
+echo 'C-f C-b forward-word'
+echo 'C-u clear line'
+echo 'C-w back word'
+echo 'C-a C-b beginning line'
+break_line

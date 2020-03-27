@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>補足</title>
+
+    <noscript id='styles'>
+        <link rel='stylesheet' href='./style.css'>
+        <link rel='stylesheet' href='/assets/style/sourcecode-font.css'>
+    </noscript>
+    <script>
+        requestAnimationFrame(() => {
+            document.head.innerHTML += document.getElementById('styles').textContent;
+        });
+    </script>
+</head>
+<body>
+
+    <article id='content'>
+        <h1 id='article-title'><a href='./index.html' samewindow>Web 講座</a></h1>
+
+    <h2 id='appendix'>補足</h2>
+    <ol>
+        <li><a href='#appendix-1' here>HTML の書き方について</a></li>
+        <li><a href='#appendix-2' here>var での変数宣言</a></li>
+        <li><a href='#appendix-3' here>アロー関数</a></li>
+        <li><a href='#appendix-4' here>switch 文</a></li>
+        <li><a href='#appendix-5' here>値渡しと参照渡し</a></li>
+        <li><a href='#appendix-6' here>セミコロンの自動挿入</a></li>
+    </ol>
+
+    <section class='appendix-item'>
+        <h3 id='appendix-1' here>HTML の書き方について</h3>
+        <p>
+            実際のコードでは、ページの情報を表す様々なタグを追加する必要があります。今回の講座では簡単のために省略しました。<br>
+            実際に用いられる HTML ファイルは次のようになっています。<br>
+            <a href='https://developer.mozilla.org/ja/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML'>head には何が入る? HTML のメタデータ - MDN</a>
+            <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+        &lt;title&gt;ページタイトル&lt;/title&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- ここにメインのコードを書く --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </code></pre>
+        </p>
+    </section>
+
+    <section class="appendix-item">
+        <h3 id='appendix-2'>var での変数宣言</h3>
+        <p>
+            JavaScript では、<code>const</code>と<code>let</code>以外にも<code>var</code>キーワードを使って変数を宣言できます。しかし、<code>var</code>を使った書き方はおすすめできません。<br>
+            理由としては、変数のスコープの問題と、再宣言の問題が挙げられます。<br>
+            <br>
+            まず、<code>var</code>を使って宣言した変数のスコープは、同一の関数内全てとなってしまいます。<code>{}</code>で囲われたブロックがスコープではありません。<br>
+            この仕様により、意図しない部分で他のコードで使用しているはずの変数に影響を及ぼしてしまい、不具合を生む原因となってしまいます。
+            <pre><code>
+function func() {
+    {
+        var variable = 3;
+    }
+    console.log(variable); // -> 3
+}
+console.log(variable); // -> variable is undefined.
+            </code></pre>
+            <br>
+            次に、<code>var</code>で宣言した変数は再宣言できてしまう問題があります。これにより、既に定義して今後使うはずの変数を、意図せず上書きしてしまう可能性があります。
+            <pre><code>
+var hoge = 3;
+var hoge = 'Hello, world!'; // ok
+
+let fuga = 3;
+let fuga = 'Hello, world!'; // error
+
+const hogefuga = 3;
+const hogefuga = 'Hello, world!' // error
+            </code></pre>
+        </p>
+    </section>
+
+
+    <section class="appendix-item">
+        <h3 id='appendix-3'>アロー関数</h3>
+        <p>
+            新しい JavaScript では、関数式の代わりにアロー関数を使用できます。<code>this</code>の扱いが変わったりするのですが、ここで説明するにはややこしすぎるのでパスさせてください。<br>
+            <a href='https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions/Arrow_functions'>アロー関数 - MDN</a>
+            <pre><code>
+// 従来
+someElement.addEventLister('click', function() {
+    doSomething();
+});
+
+// アロー関数
+someElement.addEventListener('click', () => {
+    doSomething();
+});
+            </code></pre>
+        </p>
+    </section>
+
+    <section class="appendix-item">
+        <h3 id='appendix-4'>switch 文</h3>
+        <p>
+            講座では扱いませんでしたが、もちろん JavaScript でも<code>switch</code>文を使用できます。<code>break</code>を忘れずに！<br>
+            <a href='https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/switch'>switch - MDN</a>
+            <pre><code>
+const num = 2;
+switch (num) {
+    case 1:
+        // num is 1
+        break;
+    case 2:
+        // num is 2
+        break;
+    default:
+        // num is not 1 and 2
+}
+            </code></pre>
+        </p>
+    </section>
+
+    <section class="appendix-item">
+        <h3 id='appendix-5'>値渡しと参照渡し</h3>
+        <p>
+            JavaScript では、プリミティブ値は値渡し、オブジェクトは参照渡しとなります。
+            <pre><code>
+let num = 1;
+let num2 = num;
+num = 2;
+console.log(num2); // -> 1 (NOT 2)
+
+const obj = { hoge: 1 };
+const obj2 = obj;
+obj.hoge = 2; // 再代入ではなくオブジェクトの書き換えなので、const でもエラーとならない
+console.log(obj2); // -> { hoge: 2 }
+            </code></pre>
+        </p>
+    </section>
+
+    <section class="appendix-item">
+        <h3 id='appendix-6'>セミコロンの自動挿入</h3>
+        <p>
+            JavaScript では、行末のセミコロンを省略することができます。これは、特定の条件を満たした場合に、自動的にセミコロンを挿入してコードを解釈する仕様によります。<br>
+            一方、状況によっては意図したようにセミコロンが挿入されずに、不具合の原因となってしまう場合があります。<br>
+            <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Automatic_semicolon_insertion'>Automatic semicolon insertion, Lexical grammer - MDN</a><br>
+            <br>
+            例えば、以下のコードでは<code>TypeError: hoge is not a function</code>の例外によってスクリプトが停止してしまいます。これは、2行目末尾の<code>hoge</code>のあとにセミコロンが挿入されず、4 行目から始まる丸かっこが関数呼び出しとして認識されてしまっているためです。
+            <pre><code>
+const hoge = 3
+const fuga = hoge
+
+(function() {
+    // 即時関数と呼ばれるテクニック、あまり気にしなくて良い
+    console.log('???')
+})()
+            </code></pre>
+        </p>
+    </section>
+
+    </article>
+
+    <script>
+        for (const el of document.querySelectorAll('.appendix-item')) {
+            const back = document.createElement('a')
+            back.href = '#appendix'
+            back.setAttribute('here', '')
+            back.innerText = '目次へ'
+            el.appendChild(back)
+        }
+        for (const el of document.querySelectorAll('a')) {
+            if (el.hasAttribute('here')) continue
+            if (el.hasAttribute('samewindow')) continue
+            el.target = '_blank'
+        }
+        for (const el of document.querySelectorAll('a[here]')) {
+            el.onclick = (e) => {
+                e.preventDefault()
+                const selector = e.target.getAttribute('href')
+                document.querySelector(selector).scrollIntoView()
+            }
+        }
+    </script>
+
+</body>
+</html>

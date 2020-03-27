@@ -1,0 +1,123 @@
+:root{
+    --font-size-root: 12px;
+
+    --color-black: #707070;
+    --color-blue: #4e94fe;
+
+    --element-margin: 5rem;
+
+    --shadow-unselected: 1px 2px 5px rgba(0, 0, 0, 0.16);
+    --shadow-selected: 1px 1px 2px rgba(0, 0, 0, 0.16);
+}
+
+html {
+    box-sizing: border-box;
+    font-size: var(--font-size-root);
+    color: var(--color-black);
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+}
+
+body > * {
+    text-align: center;
+    margin-bottom: var(--element-margin);
+}
+
+body > * > * {
+    margin-bottom: 1rem;
+}
+
+input:not(#size-free):not(#result-input) {
+    display: none;
+}
+
+h2 {
+    color: black;
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+label {
+    display: inline-block;
+    user-select: none; /* non-standard but it works */
+
+    margin-left: .5rem;
+    margin-right: .5rem;
+    width: 5rem;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+
+    border: 1px solid var(--color-black);
+    box-shadow: var(--shadow-unselected);
+}
+
+input:checked + label {
+    border-color: var(--color-blue);
+    box-shadow: var(--shadow-selected);
+    color: var(--color-blue);
+    font-weight: bold;
+}
+
+#size-free, #result-input {
+    display: inline-block;
+    width: 15rem;
+    height: 2rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 1px solid var(--color-black);
+}
+#size-free::placeholder, #result-input {
+    font-size: 1rem;
+    vertical-align: bottom;
+    text-align: center;
+    color: var(--color-black);
+}
+#size-free.checked {
+    color: var(--color-blue);
+    font-weight: bold;
+    border-color: var(--color-blue);
+}
+
+#generate-button, #result-copy {
+    display: inline-block;
+    outline: none;
+
+    width: 10rem;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+
+    background: none;
+    border: 1px solid var(--color-black);
+    box-shadow: var(--shadow-unselected);
+}
+
+#generate-button:disabled {
+    box-shadow: none;
+    border-color: var(--color-black);
+}
+
+#generate-button:focus, #result-copy:focus {
+    color: var(--color-blue);
+    font-weight: bold;
+    box-shadow: var(--shadow-selected);
+    border-color: var(--color-blue);
+}
+
+#result-input {
+    width: 13rem;
+}
+#result-copy {
+    display: inline-block;
+    width: 6rem;
+    margin-left: 1rem;
+}

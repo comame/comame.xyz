@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="./icon-144.png">
+    <title>時間割</title>
+</head>
+<body>
+    <div id='next-class'>
+        <h1>Next: 00:00</h1>
+        <ul>
+            <li>名前: --</li>
+            <li>場所: --</li>
+        </ul>
+    </div>
+    <div id='class-calendar'>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <td>月</td>
+                    <td>火</td>
+                    <td>水</td>
+                    <td>木</td>
+                    <td>金</td>
+                    <td>土</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div id='editor-toggle'>
+        <input type='button' value='表示切り替え'>
+    </div>
+    <div id='class-editor' class='hidden'>
+        <form>
+            <div class='type-select'>
+                <label><input type='radio' name='type' value='CREATE' checked>追加</label>
+                <label><input type='radio' name='type' value='UPDATE'>変更</label>
+                <label><input type='radio' name='type' value='REMOVE'>削除</label>
+            </div>
+            <label class='inline'>
+                曜日
+                <select name='day'>
+                    <option value='1'>月</option>
+                    <option value='2'>火</option>
+                    <option value='3'>水</option>
+                    <option value='4'>木</option>
+                    <option value='5'>金</option>
+                    <option value='6'>土</option>
+                </select>
+            </label>
+            <label class='inline'>
+                時限
+                <select name='time'>
+                    <option value='0'>1</option>
+                    <option value='1'>2</option>
+                    <option value='2'>3</option>
+                    <option value='3'>4</option>
+                    <option value='4'>5</option>
+                    <option value='5'>6</option>
+                    <option value='6'>7</option>
+                </select>
+            </label>
+            <label>講義名<input name='title'></label>
+            <label>場所<input name='place'></label>
+
+            <input type='submit'>
+        </form>
+        <input id='io-input'>
+        <input type='button' id='io-button' value='インポート・エクスポート'>
+    </div>
+    <script src='https://comame.xyz/assets/script/standard.js'></script>
+    <script src='./app.js'></script>
+    <link rel='stylesheet' href='./style.css'>
+</body>
+</html>

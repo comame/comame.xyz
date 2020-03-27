@@ -1,0 +1,14 @@
+{
+    "short_name": "Notepad",
+    "name": "Notepad",
+    "display": "standalone",
+    "start_url": "./#list",
+
+    "icons": [
+        {
+            "src": "./icon.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        }
+    ]
+}

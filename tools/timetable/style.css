@@ -1,0 +1,53 @@
+div#next-class, div#class-calendar, div#class-editor {
+    margin-bottom: 2rem;
+}
+
+#class-calendar {
+    overflow-x: scroll;
+}
+
+#class-calendar table {
+    table-layout: fixed;
+    width: 30rem;
+    border-collapse: collapse;
+    text-align: center;
+    word-break: break-all;
+}
+
+#class-calendar thead td, #class-calendar thead th {
+    border-bottom: solid 1px black;
+}
+
+#class-calendar th {
+    width: 3rem;
+
+    position: sticky;
+    left: 0;
+    z-index: 9;
+    background: white;
+}
+
+#class-calendar td.now {
+    background: skyblue;
+}
+
+#class-calendar td.next {
+    background: pink;
+}
+
+#class-calendar tbody td {
+    font-size: .5rem;
+    height: 2.5rem;
+}
+
+.hidden {
+    display: none;
+}
+
+#class-editor label {
+    display: block;
+}
+
+#class-editor .type-select label, #class-editor label.inline {
+    display: inline;
+}

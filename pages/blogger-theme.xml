@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- Copyright 2019 comame -->
+
+<!DOCTYPE html>
+<html b:responsive='true' lang='ja' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+
+  &lt;!--<head>--&gt;&lt;head&gt;
+    <meta charset='UTF-8'/>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+
+    <b:if cond='data:blog.pageType == &quot;index&quot; and data:view.isHomepage == &quot;false&quot;'>
+      <meta content='noindex' name='robots'/>
+    </b:if>
+
+    <title><data:view.title.escaped/></title>
+
+    <noscript id='deferred-styles'>
+    </noscript>
+
+    <link rel='stylesheet' href='https://comame.xyz/assets/style/blog-style.css'/>
+
+    <b:skin><![CDATA[]]></b:skin>
+  &lt;!--</head>--&gt;&lt;/head&gt;
+
+  <!-- body -->
+  <b:if cond='data:blog.pageType == &quot;index&quot;'>
+
+  <!-- index begin -->
+  <body class='index'>
+
+    <header>
+      <div id='header-inner'>
+        <div id='header-title'>
+          <a href='/'><data:blog.title/></a>
+        </div>
+        <div id='header-links'>
+          <a href='#' title='上へ'><img alt='上へ' src='https://comame.xyz/assets/img/icons/expand_less.svg'/></a>
+          <a href='#search' title='検索'><img alt='検索' src='https://comame.xyz/assets/img/icons/search.svg'/></a>
+        </div>
+      </div>
+    </header>
+
+    <div id='main'>
+      <b:if cond='data:search.query'>
+        <data:search.query/>
+      </b:if>
+      <b:section id='posts'>
+        <b:widget id='Blog1' locked='false' title='ブログの投稿' type='Blog' version='1'>
+          <b:includable id='main'>
+            <ul id='posts-list'>
+              <b:loop values='data:posts' var='post'>
+                <li>
+                  <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
+                  <time class='posttime' expr:datetime='data:post.date'><data:post.date/></time>
+                  <b:if cond='data:post.labels[0]'>
+                    <b:loop values='data:post.labels' var='label'>
+                      <a class='label' expr:href='data:label.url'>
+                        <b:eval expr='data:label.name'/>
+                      </a>
+                    </b:loop>
+                    <b:else/>
+                    <span class='label'>ラベルなし</span>
+                  </b:if>
+                  <a class='snippet' expr:href='data:post.url'><p><data:post.snippet/></p></a>
+                  <a class='readmore' expr:href='data:post.url'>もっと読む</a>
+                </li>
+              </b:loop>
+            </ul>
+            <div id='nav-icon-wrap'>
+              <b:if cond='data:newerPageUrl'>
+                <a class='nav-icon' expr:href='data:newerPageUrl' title='新しい記事'><img alt='新しい記事' src='https://comame.xyz/assets/img/icons/navigate_before.svg'/></a>
+                <b:else/>
+                <img alt='新しい記事' class='nav-icon' src='https://comame.xyz/assets/img/icons/navigate_before.svg' style='visibility:hidden;'/>
+              </b:if>
+              <a class='nav-icon' href='/' title='ホーム'><img alt='ホーム' src='https://comame.xyz/assets/img/icons/home.svg'/></a>
+              <b:if cond='data:olderPageUrl'>
+                <a class='nav-icon' expr:href='data:olderPageUrl' title='古い記事'><img alt='古い記事' src='https://comame.xyz/assets/img/icons/navigate_next.svg'/></a>
+                <b:else/>
+                <img alt='古い記事' class='nav-icon' src='https://comame.xyz/assets/img/icons/navigate_next.svg' style='visibility:hidden;'/>
+              </b:if>
+            </div>
+          </b:includable>
+        </b:widget>
+      </b:section>
+    </div>
+
+    <form action='/search' id='search' method='GET'>
+      <input id='search-box' name='q' placeholder='検索する文字列を入力...'/>
+      <input id='search-button' type='submit' value='検索'/>
+    </form>
+
+    <footer>
+      <ul id='footer-links'>
+        <li><a href='/p/policy.html'>プライバシー&#12539;問い合わせ</a></li>
+        <li><a href='/feeds/posts/default'>フィード</a></li>
+        <li><a href='https://comame.xyz'>comame.xyz</a></li>
+      </ul>
+      <small id='copyright'>Theme by <a href='https://comame.xyz'>comame</a></small>
+    </footer>
+
+    <script async='async' id='blog-script' src='https://comame.xyz/assets/priv-script/blog.js'/>
+    <script>
+      requestAnimationFrame(function() {
+        document.head.innerHTML += document.getElementById(&quot;deferred-styles&quot;).textContent;
+      });
+      document.getElementById(&quot;blog-script&quot;).addEventListener(&quot;load&quot;, function() {
+        indexPage();
+      });
+    </script>
+
+    &lt;!--</body>--&gt;&lt;/body&gt;
+  <!-- index end -->
+
+  <b:elseif cond='data:blog.pageType == &quot;item&quot; or data:blog.pageType == &quot;static_page&quot;'/>
+
+  <!-- post begin -->
+  <body class='post'>
+    <b:section id='post'>
+      <b:widget id='Blog2' locked='false' title='ブログの投稿' type='Blog' version='1'>
+
+        <b:includable id='main'>
+          <b:loop values='data:posts' var='post'>
+            <header>
+              <div id='header-inner'>
+                <div id='header-title'>
+                  <a href='/'><data:blog.title/></a>
+                </div>
+                <div id='header-links'>
+                  <a href='#' title='上へ'><img alt='上へ' src='https://comame.xyz/assets/img/icons/expand_less.svg'/></a>
+                  <a href='#search' title='検索'><img alt='検索' src='https://comame.xyz/assets/img/icons/search.svg'/></a>
+                  <a href='#share' title='共有'><img alt='共有' src='https://comame.xyz/assets/img/icons/share.svg'/></a>
+                </div>
+              </div>
+            </header>
+            <article>
+              <div id='metadata'>
+                <h1 id='article-title'><a href='#'><data:post.title/></a></h1>
+                <time expr:datetime='data:post.date' id='article-posttime'><data:post.date/></time>
+                <b:if cond='data:post.labels[0]'>
+                  <b:loop values='data:post.labels' var='label'><a class='label' expr:href='data:label.url'><b:eval expr='data:label.name'/></a></b:loop>
+                  <b:else/>
+                  <span id='label'>ラベルなし</span>
+                </b:if>
+              </div>
+              <div id='content'><data:post.body/></div>
+            </article>
+            <div id='share'>
+              <img alt='共有' id='share-icon' src='https://comame.xyz/assets/img/icons/share.svg'/>
+              <a class='buttons' href='' rel='noopener' target='_blank' title='Twitter で共有'>
+                <img alt='Twitter で共有' src='https://comame.xyz/assets/img/icons/twitter_logo.svg'/>
+              </a>
+              <a class='buttons' href='' rel='noopener' target='_blank' title='Facebook で共有'>
+                <img alt='Facebook で共有' src='https://comame.xyz/assets/img/icons/facebook_logo.svg'/>
+              </a>
+              <a class='buttons' title='URL をコピー'>
+                <img alt='URL をコピー' src='https://comame.xyz/assets/img/icons/link.svg'/>
+              </a>
+              <p>JavaScript を有効にしてください</p>
+            </div>
+            <form action='/search' id='search' method='GET'>
+              <input id='search-box' name='q' placeholder='検索する文字列を入力...'/>
+              <input id='search-button' type='submit' value='検索'/>
+            </form>
+            <footer>
+              <ul id='footer-links'>
+                <li><a href='/p/policy.html'>プライバシー&#12539;問い合わせ</a></li>
+                <li><a href='/feeds/posts/default'>フィード</a></li>
+                <li><a href='https://comame.xyz'>comame.xyz</a></li>
+              </ul>
+              <small id='copyright'>Theme by <a href='https://comame.xyz'>comame</a></small>
+            </footer>
+          </b:loop>
+        </b:includable>
+      </b:widget>
+    </b:section>
+    <script async='async' id='blog-script' src='https://comame.xyz/assets/priv-script/blog.js'/>
+    <script>
+      requestAnimationFrame(function() {
+        document.head.innerHTML += document.getElementById(&quot;deferred-styles&quot;).textContent;
+      });
+      document.getElementById(&quot;blog-script&quot;).addEventListener(&quot;load&quot;, function() {
+        postPage();
+      });
+    </script>
+  &lt;!--</body>--&gt;&lt;/body&gt;
+  <!-- post end-->
+
+  <!-- else -->
+  <b:else/>
+    <body>404 Not Found: ページが見つかりませんでした</body>
+  </b:if>
+</html>

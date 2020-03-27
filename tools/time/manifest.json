@@ -1,0 +1,14 @@
+{
+    "short_name": "時計",
+    "name": "時計",
+    "display": "standalone",
+    "start_url": "./",
+
+    "icons": [
+        {
+            "src": "./icon-144.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        }
+    ]
+}

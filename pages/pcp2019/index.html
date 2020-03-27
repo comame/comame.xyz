@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PCP 2019 Web 講座</title>
+
+    <noscript id='styles'>
+        <link rel='stylesheet' href='./style.css'>
+        <link rel='stylesheet' href='/assets/style/sourcecode-font.css'>
+    </noscript>
+    <script>
+        requestAnimationFrame(() => {
+            document.head.innerHTML += document.getElementById('styles').textContent;
+        });
+    </script>
+</head>
+<body>
+    <article id='content'>
+        <h1 id='article-title'>Web 講座</h1>
+
+
+        <h2>講座資料</h2>
+        <ul>
+            <li>
+                <a href='https://comame.xyz/r/pcp2019-web-day1'>
+                    Day 1: 構成要素とチュートリアル
+                </a> (<a href='./day1.pdf'>pdf</a>)
+            </li>
+            <li>
+                <a href='https://comame.xyz/r/pcp2019-web-day2'>
+                    Day 2: DOM, Web API
+                </a> (<a href='./day2.pdf'>pdf</a>)
+            </li>
+            <li>
+                <a href='./day1.zip'>
+                    Day 1 サンプルコード (zip)
+                </a>
+            </li>
+            <li>
+                <a href='./day2.zip'>
+                    Day 2 サンプルコード (zip)
+                </a>
+            </li>
+        </ul>
+
+        <h2>事前準備</h2>
+        <h3>インストールするもの</h3>
+
+        <ul>
+            <li><a href='https://chrome.google.com'>Google Chrome 安定版</a></li>
+            <li><a href='https://code.visualstudio.com'>Visual Studio Code</a></li>
+            <li><a href='https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb'>Web Server for Chrome</a></li>
+        </ul>
+        <p>
+            Chrome のベータ版、開発版を使っている人は、一度アンインストールする必要があります。(Stable と Beta / Dev チャンネルは同時にインストールできない)<br>
+            また、開発環境を統一するために、なれているエディタがある場合でも今回は Code を使用してください。
+        </p>
+
+        <h2>参考</h2>
+        <h3>Web チュートリアル</h3>
+        <ul>
+            <li><a href='https://developer.mozilla.org/ja/docs/Learn'>Web 開発を学ぶ - MDN</a></li>
+            <li><a href='https://developer.mozilla.org/ja/docs/Web/Tutorials'>チュートリアル - MDN</a></li>
+            <li><a href='https://prog-8.com/languages/html'>HTML & CSS - Progate</a></li>
+            <li><a href='https://prog-8.com/languages/es6'>JavaScript - Progate</a></li>
+        </ul>
+        <h3>Day 1</h3>
+        <ul>
+            <li><a href='https://developer.mozilla.org/ja/docs/Web/HTML'>HTML: HyperText Markup Language - MDN</a></li>
+            <li><a href='https://developer.mozilla.org/ja/docs/Web/CSS'>CSS: カスケーディングスタイルシート - MDN</a></li>
+            <li><a href='https://developer.mozilla.org/ja/docs/Web/JavaScript'>JavaScript - MDN</a></li>
+            <li><a href='https://qiita.com/shimajiri/items/dd97247dc95c3dd5f4e6'>CSSセレクタについて - Qiita</a></li>
+        </ul>
+        <h3>Day 2</h3>
+        <ul>
+            <li><a href='https://developer.mozilla.org/ja/docs/Web/Guide/HTML/HTML5'>HTML5 - MDN</a></li>
+        </ul>
+        <h3>その他</h3>
+        <ul>
+            <li><a href='https://qiita.com/suzu-4/items/ea5d802cb0ad16682ae2'>すべての新米フロントエンドエンジニアに読んでほしい50の資料 - Qiita</a></li>
+        </ul>
+
+        <h2>補足</h2>
+        <a href='./appendix.html' samewindow>別ページ</a>
+
+    </article>
+
+    <script>
+        for (const el of document.querySelectorAll('a')) {
+            if (el.hasAttribute('here')) continue
+            if (el.hasAttribute('samewindow')) continue
+            el.target = '_blank'
+        }
+    </script>
+</body>
+</html>
