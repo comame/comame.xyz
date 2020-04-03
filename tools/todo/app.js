@@ -290,8 +290,29 @@ function setInitialEventListeners() {
 
     window.addEventListener('keydown', (e) => {
         if (e.code == 'Escape') {
+            e.target.blur()
             closeEditor()
         }
+        if (e.code == 'KeyC') {
+            e.preventDefault()
+            openEditor()
+        }
+        if (e.code == 'KeyT') {
+            toggleShowDoneElement.click()
+        }
+        if (e.code == 'Slash') {
+            e.preventDefault()
+            searchFilterElement.focus()
+        }
+    })
+
+    document.querySelectorAll('input, textarea').forEach((elements) => {
+        elements.addEventListener('keydown', (e) => {
+            if (e.code == 'Escape') {
+                return
+            }
+            e.stopPropagation()
+        })
     })
 
     // Adjust textarea height
