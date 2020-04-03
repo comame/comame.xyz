@@ -102,7 +102,7 @@ async function openEditor(optionalEditTodoId) {
     todoEditorElement.classList.add('open')
     todoTitleElement.focus()
 
-    const undoneTodos = (await Database.listAll()).filter(todo => !todo.done)
+    const undoneTodos = (await Database.listAll()).filter(todo => !(todo.done || 'requires' in todo))
     for (const todo of undoneTodos) {
         const option = document.createElement('option')
         option.value = todo.id
