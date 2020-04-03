@@ -14,7 +14,7 @@ async function updateTodo(todo) {
 
 async function filterTodos(filterRegex) {
     document.querySelector('.todos').innerHTML = ''
-    const regexObj = new RegExp(filterRegex)
+    const regexObj = new RegExp(filterRegex, 'i')
     const allTodos = await Database.listAll()
     const fileteredTodos = allTodos.filter(todo => {
         return regexObj.test(todo.title) || regexObj.test(todo.detail)
