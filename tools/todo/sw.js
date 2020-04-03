@@ -1,6 +1,6 @@
 const CACHE = {
     key_prefix: 'todo',
-    key: '20200403-1',
+    key: '20200403-2',
     files: [
         './',
         './app.js',

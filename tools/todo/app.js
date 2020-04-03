@@ -101,6 +101,14 @@ async function openEditor(optionalEditTodoId) {
 
     todoEditorElement.classList.add('open')
     todoTitleElement.focus()
+
+    const undoneTodos = (await Database.listAll()).filter(todo => !todo.done)
+    for (const todo of undoneTodos) {
+        const option = document.createElement('option')
+        option.value = todo.id
+        option.textContent = todo.title
+        todoRequiresElement.appendChild(option)
+    }
 }
 
 function closeEditor(optionalClearEditor = false) {
@@ -113,6 +121,7 @@ function closeEditor(optionalClearEditor = false) {
         todoTitleElement.value = ''
         todoDetailElement.value = ''
         todoRequiresElement.value = ''
+        todoRequiresElement.innerHTML = '<option selected value="">Thread</option>'
     }
 
     todoRequiresElement.disabled = false
@@ -142,12 +151,6 @@ function updateTodoUI(todo) {
     } else {
         li.removeAttribute('todo-done')
         doneButton.textContent = 'DONE'
-    }
-
-    const requriesOption =
-        document.querySelector(`#todo-editor .todo-requires option[value='${id}']`)
-    if (requriesOption) {
-        requriesOption.textContent = `${id}: ${todo.title}`
     }
 
     const ul = li.parentElement
@@ -224,12 +227,6 @@ function appendTodoToUI(todo) {
 
         parentElement.insertBefore(ul, parentElement.children[0])
         ul.appendChild(li)
-
-        const requireSelectElement = document.querySelector('#todo-editor .todo-requires')
-        const option = document.createElement('option')
-        option.textContent = todo.id + ': ' + todo.title
-        option.value = todo.id
-        requireSelectElement.appendChild(option)
 
         updateTodoUI(todo)
     }
