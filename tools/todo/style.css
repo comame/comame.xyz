@@ -109,9 +109,12 @@ button:active {
     width: var(--todos-width);
     margin-right: auto;
     margin-left: auto;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
 }
 .todos ul {
-    width: 20rem;
+    flex: 2 1 20rem;
     margin: 1rem;
     padding: 1rem 2rem;
 
@@ -143,6 +146,9 @@ button:active {
     margin-bottom: 1rem;
     display: flex;
     flex-direction: row-reverse;
+}
+li:not([todo-done]) .delete-button {
+    display: none;
 }
 
 #filter-wrap {

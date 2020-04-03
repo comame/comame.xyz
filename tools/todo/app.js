@@ -28,6 +28,12 @@ async function filterTodos(filterRegex) {
     }
 }
 
+async function deleteTodo(id) {
+    if (!confirm('Delete?')) return
+    await Database.delete(id)
+    initializeTodos()
+}
+
 async function initializeTodos() {
     const todos = await Database.listAll()
     document.querySelector('.todos').innerHTML = ''
@@ -171,22 +177,32 @@ function appendTodoToUI(todo) {
         await updateTodo(todo)
     }
 
+    const deleteButtonOnClick = async () => {
+        const id = todo.id
+        await deleteTodo(id)
+    }
+
     const createLi = (todo) => {
         const li = document.createElement('li')
         const h2 = document.createElement('h2')
         const p = document.createElement('p')
         const buttons = document.createElement('div')
+        const deleteButton = document.createElement('button')
         const editButton = document.createElement('button')
         const doneButton = document.createElement('button')
 
         h2.classList.add('title')
         p.classList.add('detail')
         buttons.classList.add('buttons')
+        deleteButton.classList.add('delete-button')
         editButton.classList.add('edit-button')
         doneButton.classList.add('done-button')
 
+        deleteButton.addEventListener('click', deleteButtonOnClick)
         editButton.addEventListener('click', editButtonOnClick)
         doneButton.addEventListener('click', doneButtonOnClick)
+
+        deleteButton.textContent = 'DELETE'
 
         li.setAttribute('todo-id', todo.id)
 
@@ -195,6 +211,7 @@ function appendTodoToUI(todo) {
         li.appendChild(buttons)
         buttons.appendChild(doneButton)
         buttons.appendChild(editButton)
+        buttons.appendChild(deleteButton)
 
         return li
     }
