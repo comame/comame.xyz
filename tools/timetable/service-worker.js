@@ -1,6 +1,6 @@
 const CACHE = {
     key_prefix: "timetable",
-    key: "20190930-01",
+    key: "20200409-01",
     files: [
         "./",
         "./index.html",

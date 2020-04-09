@@ -1,12 +1,12 @@
 const CACHE = {
     key_prefix: "time",
-    key: "20181218-04",
+    key: "20200409-01",
     files: [
         "./",
         "./index.html",
         "./app.js",
         "./style.css",
-        "./icon-144.png",
+        "./icon.png",
         "./manifest.json",
         "https://comame.xyz/assets/style/sourcecode-font.css",
         "https://comame.xyz/assets/script/sw-template.js"
