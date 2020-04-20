@@ -20,11 +20,7 @@ alias lla='ls -laG'
 alias dc='docker-compose'
 alias kc='kubectl'
 
-
-# Bash keybinds
-
-bind '"\C-f": forward-word'
-bind '"\C-b": backward-word'
+export EDITOR=vim
 
 
 # Disable default Ctrl-S behavior
@@ -34,11 +30,19 @@ stty stop undef
 
 # Echo
 
+function help_keybind() {
 break_line
-echo 'C-p history'
-echo 'C-r C-s Search'
-echo 'C-f C-b forward-word'
-echo 'C-u clear line'
-echo 'C-w back word'
-echo 'C-a C-b beginning line'
+echo 'C-p Previous commands'
+echo 'C-r Search'
+echo 'C-u Clear line'
+echo 'C-a C-e Line start / end'
+echo 'C-h Backspace'
+echo 'C-m Enter'
 break_line
+}
+
+help_keybind
+
+
+cd
+
