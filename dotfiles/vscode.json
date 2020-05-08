@@ -10,11 +10,11 @@
     "workbench.startupEditor": "none",
     "workbench.colorTheme": "Default Dark+",
     "workbench.tree.renderIndentGuides": "none",
-    "workbench.activityBar.visible": true,
     "workbench.statusBar.visible": true,
     "workbench.editor.enablePreview": false,
     "workbench.editor.showTabs": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.scrollToSwitchTabs": true,
 
     "zenMode.restore": false,
     "zenMode.fullScreen": true,
@@ -41,6 +41,7 @@
     "editor.smoothScrolling": true,
     "editor.minimap.enabled": false,
     "editor.scrollBeyondLastLine": false,
+    "editor.renderControlCharacters": false,
     "editor.quickSuggestions": {
         "other": true,
         "comments": true,
@@ -48,10 +49,7 @@
     },
 
     "terminal.integrated.shell.windows": "C:\\Windows\\system32\\bash.exe",
-    "terminal.integrated.confirmOnExit": true,
 
-    "npm.enableScriptExplorer": true,
-    "diffEditor.ignoreTrimWhitespace": true,
     "typescript.updateImportsOnFileMove.enabled": "always",
     "javascript.updateImportsOnFileMove.enabled": "always"
 
