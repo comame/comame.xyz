@@ -3,6 +3,10 @@ const timetable =
 const timetableStr =
     ['09:00', '10:40', '13:00', '14:45', '16:30', '18:15', '19:55']
 
+String.prototype.escape = function() {
+    return this.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
 class App {
     constructor(date) {
         const nextClassElement = new NextClassElement()

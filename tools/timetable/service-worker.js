@@ -1,6 +1,6 @@
 const CACHE = {
     key_prefix: "timetable",
-    key: "20200409-01",
+    key: "20200512-01",
     files: [
         "./",
         "./index.html",
@@ -8,8 +8,7 @@ const CACHE = {
         "./style.css",
         "./icon-144.png",
         "./manifest.json",
-        "https://comame.xyz/assets/script/sw-template.js",
-        'https://comame.xyz/assets/script/standard.js'
+        "https://comame.xyz/assets/script/sw-template.js"
     ]
 }
 
