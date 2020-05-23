@@ -30,18 +30,21 @@ stty stop undef
 # Echo
 
 function help_keybind() {
-break_line
-echo 'C-p Previous commands'
-echo 'C-r Search'
-echo 'C-u Clear line'
-echo 'C-a C-e Line start / end'
-echo 'C-h Backspace'
-echo 'C-m Enter'
-break_line
+    break_line
+    echo 'C-p Previous commands'
+    echo 'C-r Search'
+    echo 'C-u Clear line'
+    echo 'C-a C-e Line start / end'
+    echo 'C-h Backspace'
+    echo 'C-m Enter'
+    break_line
 }
-
-help_keybind
 
 
 cd
-
+pwd
+ls
+function c() {
+    code $1 && exit
+}
+echo
