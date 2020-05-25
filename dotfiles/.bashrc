@@ -8,6 +8,17 @@ function echo_red_string(){
 function break_line(){
     echo ''
 }
+function watchFile() {
+    last=`openssl sha256 -r $1 | awk '{print $1}'`
+    while true; do
+        sleep 3
+        current=`openssl sha256 -r $1 | awk '{print $1}'`
+        if [ "$last" != "$current" ]; then
+            eval $2
+            last=$current
+        fi  
+    done
+}
 
 
 # Aliases
