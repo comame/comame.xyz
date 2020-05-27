@@ -9,9 +9,10 @@ function break_line(){
     echo ''
 }
 function watchFile() {
+    eval $2
     last=`openssl sha256 -r $1 | awk '{print $1}'`
     while true; do
-        sleep 3
+        sleep 0.5
         current=`openssl sha256 -r $1 | awk '{print $1}'`
         if [ "$last" != "$current" ]; then
             eval $2
