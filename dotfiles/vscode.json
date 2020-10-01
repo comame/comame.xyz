@@ -11,6 +11,7 @@
     "workbench.colorTheme": "Default Dark+",
     "workbench.tree.renderIndentGuides": "none",
     "workbench.statusBar.visible": true,
+    "workbench.sideBar.location": "right",
     "workbench.editor.enablePreview": false,
     "workbench.editor.showTabs": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
@@ -49,8 +50,5 @@
     },
 
     "terminal.integrated.shell.windows": "C:\\Windows\\system32\\bash.exe",
-
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "javascript.updateImportsOnFileMove.enabled": "always"
-
+    "terminal.integrated.mouseWheelScrollSensitivity": 0.3,
 }
