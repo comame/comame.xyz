@@ -52,6 +52,10 @@ function help_keybind() {
     break_line
 }
 
+function publish() {
+    docker run --rm -v "$(pwd)":/files -p 8080:80 comameito/static-server
+}
+
 
 cd
 pwd
