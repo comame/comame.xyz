@@ -2,12 +2,7 @@
 if [[ $- != *i* ]]; then return; fi
 
 
-function echo_red_string(){
-    echo -e '\033[0;31m'$1'\033[0;39m'
-}
-function break_line(){
-    echo ''
-}
+# Utilities
 function watchFile() {
     eval $2
     last=`openssl sha256 -r $1 | awk '{print $1}'`
@@ -19,6 +14,10 @@ function watchFile() {
             last=$current
         fi  
     done
+}
+
+function publish() {
+    docker run --rm -v "$(pwd)":/files -p 8080:80 comameito/static-server
 }
 
 
@@ -39,7 +38,7 @@ export EDITOR=vim
 stty stop undef
 
 
-# Echo
+# Startup
 
 function help_keybind() {
     break_line
@@ -51,11 +50,6 @@ function help_keybind() {
     echo 'C-m Enter'
     break_line
 }
-
-function publish() {
-    docker run --rm -v "$(pwd)":/files -p 8080:80 comameito/static-server
-}
-
 
 cd
 pwd
