@@ -10,7 +10,7 @@ function watchFile() {
         sleep 0.5
         current=`openssl sha256 -r $1 | awk '{print $1}'`
         if [ "$last" != "$current" ]; then
-            eval $2
+            eval ${@:2}
             last=$current
         fi  
     done
@@ -18,6 +18,10 @@ function watchFile() {
 
 function publish() {
     docker run --rm -v "$(pwd)":/files -p 8080:80 comameito/static-server
+}
+
+function clearDocker() {
+    docker rm -f $(docker ps -aq)
 }
 
 
@@ -58,3 +62,4 @@ function c() {
     code $1 && exit
 }
 echo
+
