@@ -12,18 +12,17 @@ function watchFile() {
         if [ "$last" != "$current" ]; then
             eval ${@:2}
             last=$current
-        fi  
+        fi
     done
 }
 
 function publish() {
-    docker run --rm -v "$(pwd)":/files -p 8080:80 comameito/static-server
+    docker run --rm -v "$(pwd)":/files -p ${1:-'8080'}:80 comameito/static-server
 }
 
 function clearDocker() {
     docker rm -f $(docker ps -aq)
 }
-
 
 # Aliases
 
@@ -62,4 +61,3 @@ function c() {
     code $1 && exit
 }
 echo
-
