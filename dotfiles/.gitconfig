@@ -1,0 +1,12 @@
+[user]
+	email = dev@comame.xyz
+	name = comame
+	signingkey = [signingkeyID]
+[core]
+	excludesfile = /home/comame/.gitignore_global
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
