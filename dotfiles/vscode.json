@@ -43,6 +43,8 @@
     "editor.minimap.enabled": false,
     "editor.scrollBeyondLastLine": false,
     "editor.renderControlCharacters": false,
+    "editor.fontFamily": "Consolas, monospace",
+    "editor.inlineSuggest.enabled": true,
     "editor.quickSuggestions": {
         "other": true,
         "comments": true,
@@ -51,4 +53,10 @@
 
     "terminal.integrated.shell.windows": "C:\\Windows\\system32\\bash.exe",
     "terminal.integrated.mouseWheelScrollSensitivity": 0.3,
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    "emmet.excludeLanguages": [
+        "markdown",
+        "javascript"
+    ]
 }
