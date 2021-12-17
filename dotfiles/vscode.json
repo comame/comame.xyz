@@ -37,7 +37,8 @@
     "editor.smoothScrolling": true,
     "editor.scrollBeyondLastLine": false,
     "editor.renderControlCharacters": false,
-    "editor.fontFamily": "Consolas, monospace",
+    "editor.fontFamily": "Cascadia Mono, Consolas, monospace",
+    "editor.fontWeight": "380",
     "editor.inlineSuggest.enabled": true,
     "editor.quickSuggestions": {
         "other": true,
