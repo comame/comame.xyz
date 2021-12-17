@@ -17,18 +17,13 @@
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.editor.scrollToSwitchTabs": true,
 
-    "zenMode.restore": false,
-    "zenMode.fullScreen": true,
-    "zenMode.hideStatusBar": false,
-    "zenMode.hideLineNumbers": false,
-    "zenMode.hideTabs": false,
-
     "search.smartCase": true,
     "search.showLineNumbers": true,
 
     "editor.tabSize": 4,
     "editor.fontSize": 14,
     "editor.mouseWheelScrollSensitivity": 2,
+    "editor.minimap.side": "left",
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "indent",
     "editor.renderWhitespace": "all",
@@ -40,7 +35,6 @@
     "editor.formatOnPaste": false,
     "editor.mouseWheelZoom": false,
     "editor.smoothScrolling": true,
-    "editor.minimap.enabled": false,
     "editor.scrollBeyondLastLine": false,
     "editor.renderControlCharacters": false,
     "editor.fontFamily": "Consolas, monospace",
@@ -51,12 +45,13 @@
         "strings": true
     },
 
-    "terminal.integrated.shell.windows": "C:\\Windows\\system32\\bash.exe",
     "terminal.integrated.mouseWheelScrollSensitivity": 0.3,
     "diffEditor.ignoreTrimWhitespace": false,
 
     "emmet.excludeLanguages": [
         "markdown",
         "javascript"
-    ]
+    ],
+
+    "terminal.integrated.defaultProfile.windows": "ubuntu-20.04 (WSL)"
 }
