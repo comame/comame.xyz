@@ -15,8 +15,8 @@ const update = () => {
 
     const element = document.getElementById('time')
     element.setAttribute('datetime', currentDate.toISOString())
-    // element.textContent = `${year}.${month}.${date}(${day}) ${hoursStr}:${minutesStr}:${secondsStr}`
-    element.textContent = ` ${hoursStr}:${minutesStr}:${secondsStr}`
+    element.textContent = `${year}.${month}.${date}(${day}) ${hoursStr}:${minutesStr}:${secondsStr}`
+    // element.textContent = ` ${hoursStr}:${minutesStr}:${secondsStr}`
 }
 
 const nextFrame = () => requestAnimationFrame(() => {
