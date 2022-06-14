@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans JP';
+}
+
+body {
+    margin: 0;
+}
+
+.Clock {
+    display: inline-block;
+    background: #f3f2f3;
+
+    height: 3rem;
+    border-radius: 3rem 0 0 3rem;
+    padding: 0 1.5rem 0 1rem;
+}
+
+.Clock > img {
+    vertical-align: middle;
+}
+
+.Clock > time {
+    line-height: 3rem;
+    font-weight: bold;
+}
+
+.Clock > * {
+    font-size: .8rem;
+    line-height: 3rem;
+}
+
+.Clock > *:not(:last-child) {
+    margin-right: .5rem;
+}
