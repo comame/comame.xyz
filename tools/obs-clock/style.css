@@ -17,7 +17,6 @@ body {
     height: 3rem;
     border-radius: 3rem 0 0 3rem;
     padding: 0 1.5rem 0 1rem;
-    max-width: 800px; /*  default value of OBS browser widget's width */
 }
 
 .Clock > img {
