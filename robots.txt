@@ -1,5 +1,0 @@
-user-agent: *
-disallow: /login/
-disallow: /logout/
-disallow: /assets/
-allow: /assets/script/

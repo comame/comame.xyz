@@ -1,137 +1,18 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="comame (@comameito) / Google Product Expert">
-
-    <link rel="canonical" href="https://comame.xyz">
-    <link rel="icon" type="image/png" href="./assets/img/prof-icon-144.png">
-    <link rel="manifest" href="./manifest.json">
-
-    <title>comame.xyz</title>
-
-    <noscript>
-        <link rel="stylesheet" href="./assets/style/noscript.css">
-    </noscript>
-    <noscript id="deferred-styles">
-        <link rel="stylesheet" href="./assets/style/ubuntu-font.css">
-    </noscript>
-
-    <script>
-        requestAnimationFrame(function() {
-            document.head.innerHTML += document.getElementById("deferred-styles").textContent;
-        });
-    </script>
-    <script src="./sw-register.js" async></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/style.css">
+    <title>comame</title>
 </head>
 
-<body>
-    <noscript>JavaScript required.</noscript>
+<body class="h-screen bg-gradient-to-b from-background1 to-background2 from-50% via-[74%] to-[95%] p-16">
+    <div class="h-64 w-64 rounded-16 bg-background4 text-center text-text3">A</div>
+    <footer class="fixed bottom-0 left-0 w-full text-center text-text2 leading-8">© comame</footer>
 
-    <div class="centering-wrap profile">
-        <div class="centering">
-            <div id="prof-div">
-                <picture>
-                    <source type="image/webp" srcset="./assets/img/prof-icon.png.webp">
-                    <img id="prof-icon" src="./assets/img/prof-icon.png" alt="プロフィールアイコン">
-                </picture>
-                <h1 id="name">comame</h1>
-            </div>
-
-            <p id="intro">
-                Google Product Expert<br>
-                Web Developer
-            </p>
-
-            <ul id="socials">
-                <li id="li-blog">
-                    <a rel="noopener" href="https://blog.comame.xyz" title="Blog">Blog</a>
-                </li>
-                <li id="li-twitter">
-                    <a rel="noopener" href="https://twitter.com/comameito" title="Twitter: @comameito">Twitter</a>
-                </li>
-                <li id="li-github">
-                    <a rel="noopener" href="https://github.com/comame" title="GitHub">GitHub</a>
-                </li>
-                <li id="li-email">
-                    <a rel="noopener" href="mailto:mail@comame.xyz" title="Email">Email</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <style>
-        #li-blog {
-        background: #ff5722;
-        }
-        #li-twitter {
-            background: #1DA1F2;
-        }
-        #li-github {
-            background:#24292e;
-        }
-        #li-email {
-            background: #4c8eff;
-        }
-    </style>
-
-    <style>
-        * {
-            font-family: Ubuntu;
-        }
-        body {
-            margin: 0;
-        }
-        /* Layout */
-        .profile {
-            height: 100vh;
-            min-width: 300px;
-            min-height: 550px;
-        }
-        .centering-wrap {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .centering {
-            display: inline-block;
-            padding-right: 20px;
-            padding-left: 20px;
-        }
-        /* Content */
-        #name {
-            font-weight: normal;
-            margin: 3rem auto 3rem auto;
-        }
-        #prof-icon {
-            display: inline-block;
-            width: 12rem;
-            height: 12rem;
-        }
-        #intro {
-            margin: 3rem auto;
-        }
-        #socials {
-            list-style: none;
-            padding-left: 0;
-        }
-        #socials>li {
-            display: inline-block;
-            margin: 8px;
-            border-radius: 5px;
-            box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.4);
-        }
-        #socials>li>a {
-            display: inline-block;
-            padding: 0.3em 0.5em;
-            width: 5em;
-            text-decoration: none;
-            color: white;
-        }
-    </style>
+    <script src="./app.js"></script>
 </body>
 
 </html>
