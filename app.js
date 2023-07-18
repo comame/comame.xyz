@@ -63,7 +63,7 @@ class GridItem extends HTMLElement {
             return themed`
                 <a class='h-168 w-168 rounded-16 bg-background4 inline-flex items-center justify-center data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
                     <img class='h-64 w-64 blur-sm contrast-50' src='${icon}'>
-                    <div class='text-text2 font-bold text-lg absolute data-[dark]:text-text3' ${isDarkText ? 'data-dark' : ''}>${title}</div>
+                    <div class='text-text2 font-bold text-lg absolute data-[dark]:text-text3 text-center' ${isDarkText ? 'data-dark' : ''}>${title}</div>
                 </a>
             `
         } else if (attrs.type === 'image') {
@@ -77,7 +77,7 @@ class GridItem extends HTMLElement {
 
             if (!hover) {
                 return themed`
-                    <a class='inline-block h-168 w-168 rounded-16 bg-background4 data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
+                    <a class='inline-block h-168 w-168 rounded-16 bg-background4 relative data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
                         <div class='h-full w-full rounded-16' style='background: center / cover no-repeat url(${image})'></div>
                     </a>
                 `
@@ -85,7 +85,7 @@ class GridItem extends HTMLElement {
             return themed`
                 <a class='inline-block h-168 w-168 rounded-16 bg-background4 relative data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
                     <div class='h-full w-full rounded-16 blur-sm contrast-50' style='background: center / cover no-repeat url(${image})'></div>
-                    <div class='text-text2 font-bold text-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 data-[dark]:text-text3' ${isDarkText ? 'data-dark' : ''}>${title}</div>
+                    <div class='text-text2 font-bold text-lg absolute text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 data-[dark]:text-text3' ${isDarkText ? 'data-dark' : ''}>${title}</div>
                 </a>
             `
         } else {

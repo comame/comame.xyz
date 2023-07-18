@@ -12,16 +12,27 @@
     class="min-h-screen bg-gradient-to-b from-background1 to-background2 from-50% via-[74%] to-[95%] p-16 md:p-40 relative">
     <script src="./app.js"></script>
 
-    <div class="flex gap-16 md:gap-40 flex-wrap">
+    <h2 class="mt-40 text-text1 font-bold text-xl">プロフィール</h2>
+    <div class="flex gap-16 md:gap-40 flex-wrap mt-16">
         <c-grid-item type="image" image-url="./assets/img/profile-rect.png" title="comame" link="#"></c-grid-item>
         <c-grid-item type="icon" icon-url="./assets/img/pixiv-logo.png" title="pixiv"
             link="https://www.pixiv.net/users/16791577"></c-grid-item>
-        <c-grid-item type="image" image-url="./assets/img/ika.png" title="illusts"
-            link="https://www.pixiv.net/artworks/110012977" wide></c-grid-item>
         <c-grid-item type="icon" icon-url="./assets/img/github-mark.png" title="GitHub" link="https://github.com/comame"
             dark-text></c-grid-item>
         <c-grid-item type="image" image-url="./assets/img/blog2.png" title="Blog" link="https://blog.comame.xyz"
             dark-text wide></c-grid-item>
+    </div>
+
+    <h2 class="mt-40 text-text1 font-bold text-xl">つくったもの</h2>
+    <div class="flex gap-16 md:gap-40 flex-wrap mt-16">
+        <c-grid-item type="image" image-url="./assets/img/mynumber.png" title="OpenID Connect"
+            link="https://accounts.comame.xyz/.well-known/openid-configuration" dark-text></c-grid-item>
+        <c-grid-item type="image" image-url="./assets/img/ika.png" title="illusts"
+            link="https://www.pixiv.net/artworks/110012977" wide></c-grid-item>
+        <c-grid-item type="icon" icon-url="./assets/img/gopher.png" title="router-go"
+            link="https://pkg.go.dev/github.com/comame/router-go" dark-text></c-grid-item>
+        <c-grid-item type="icon" icon-url="./assets/img/gopher.png" title="readenv-go"
+            link="https://pkg.go.dev/github.com/comame/readenv-go" dark-text></c-grid-item>
     </div>
 
     <footer class="absolute bottom-0 left-0 w-full text-center text-text2 leading-8">
