@@ -1,4 +1,5 @@
 {
     "namespace": "comame-xyz",
-    "name": "comame-xyz"
+    "name": "comame-xyz",
+    "prebuild": "npm run tailwind:build"
 }

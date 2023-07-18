@@ -3,13 +3,13 @@ module.exports = {
     content: ['./index.html', './app.js'],
     theme: {
         colors: {
-            'background1': '#50504d',
-            'background2': '#1b1b24',
-            'background3': '#ffffff',
-            'background4': '#ededed',
-            'text1': '#ffffff',
-            'text2': '#ededed',
-            'text3': '#000000'
+            background1: '#50504d',
+            background2: '#1b1b24',
+            background3: '#ffffff',
+            background4: '#ededed',
+            text1: '#ffffff',
+            text2: '#ededed',
+            text3: '#000000',
         },
         spacing: {
             0: 0,
@@ -31,7 +31,7 @@ module.exports = {
             16: 16,
             24: 24,
             max: 999999,
-        }
+        },
     },
     plugins: [],
 }

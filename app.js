@@ -1,3 +1,235 @@
-customElements.define('c-grid-item', class extends HTMLELement {
+// @ts-check
 
-})
+class GridItem extends HTMLElement {
+    constructor() {
+        super()
+        this.attachShadow({ mode: 'open' })
+    }
+
+    connectedCallback() {
+        renderElement(this, [false])
+        this.addEventListener('mouseover', () => {
+            renderElement(this, [true])
+        })
+        this.addEventListener('mouseleave', () => {
+            renderElement(this, [false])
+        })
+        this.addEventListener('focusin', () => {
+            renderElement(this, [true])
+        })
+        this.addEventListener('focusout', () => {
+            renderElement(this, [false])
+        })
+    }
+
+    static observedAttributes = [
+        'type',
+        'title',
+        'icon-url',
+        'image-url',
+        'link',
+        'dark-text',
+        'wide'
+    ]
+
+    /**
+     * @param {boolean[]} params
+     * @returns {string}
+     */
+    render(params) {
+        const [hover] = params
+
+        const attrs = getSelfAttributes(this)
+
+        const isDarkText = attrs['dark-text'] !== null
+        const isWide = attrs['wide'] !== null
+
+        if (attrs.type === 'icon') {
+            const icon = attrs['icon-url']
+            const url = attrs['link']
+            const title = attrs['title']
+
+            if (!icon || !title || !url) {
+                throw new TypeError('missing attributes')
+            }
+
+            if (!hover) {
+                return themed`
+                    <a class='h-168 w-168 rounded-16 bg-background4 inline-flex items-center justify-center data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
+                        <img class='h-64 w-64' src='${icon}'>
+                    </a>
+                `
+            }
+            return themed`
+                <a class='h-168 w-168 rounded-16 bg-background4 inline-flex items-center justify-center data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
+                    <img class='h-64 w-64 blur-sm contrast-50' src='${icon}'>
+                    <div class='text-text2 font-bold text-lg absolute data-[dark]:text-text3' ${isDarkText ? 'data-dark' : ''}>${title}</div>
+                </a>
+            `
+        } else if (attrs.type === 'image') {
+            const image = attrs['image-url']
+            const url = attrs['link']
+            const title = attrs['title']
+
+            if (!image || !title || !url) {
+                throw new TypeError('missing attributes')
+            }
+
+            if (!hover) {
+                return themed`
+                    <a class='inline-block h-168 w-168 rounded-16 bg-background4 data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
+                        <div class='h-full w-full rounded-16' style='background: center / cover no-repeat url(${image})'></div>
+                    </a>
+                `
+            }
+            return themed`
+                <a class='inline-block h-168 w-168 rounded-16 bg-background4 relative data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
+                    <div class='h-full w-full rounded-16 blur-sm contrast-50' style='background: center / cover no-repeat url(${image})'></div>
+                    <div class='text-text2 font-bold text-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 data-[dark]:text-text3' ${isDarkText ? 'data-dark' : ''}>${title}</div>
+                </a>
+            `
+        } else {
+            throw 'unimplemented'
+        }
+    }
+}
+
+customElements.define('c-grid-item', GridItem)
+
+// === Utility functions for HTML custom elements ===
+
+/**
+ * `innerHTML` が変化したらコールバックを呼ぶ。`disconnectedCallback()` で解除すること。
+ *
+ * @param {(content: string) => unknown} callback
+ * @param {HTMLElement} self
+ * @returns {number}
+ */
+function onSlotChange(callback, self) {
+    let prev = ''
+    return setInterval(async () => {
+        if (self.innerHTML == prev) {
+            return
+        }
+        callback(self.innerHTML)
+        prev = self.innerHTML
+    })
+}
+
+/**
+ * @param {number} id
+ */
+function removeSlotChange(id) {
+    clearInterval(id)
+}
+
+/**
+ * Tailwind CSS から出力されたスタイルを読む HTML を吐き出す
+ *
+ * @param {TemplateStringsArray} string
+ * @param {...string} keys
+ * @returns {string}
+ */
+function themed(string, ...keys) {
+    /**
+     * @param {string} css
+     */
+    function __getThemeTag(css) {
+        /** @type {HTMLTemplateElement} */
+        // @ts-expect-error
+        let template = document.getElementById('__style')
+        if (!template) {
+            const el = document.createElement('template')
+            el.id = '__style'
+            document.body.appendChild(el)
+            template = el
+        }
+
+
+        if (!template.textContent) {
+            fetch(css)
+                .then(res => res.text())
+                .then(css => {
+                    template.textContent = css
+                })
+            return `<link rel='stylesheet' href='${css}'>`
+        }
+
+        return `<style>${template.textContent}</style>`
+    }
+
+    const styleTag = __getThemeTag('/dist/style.css')
+
+    let orig = ''
+    for (let i = 0; i < keys.length; i += 1) {
+        orig += string[i]
+        orig += keys[i]
+    }
+    orig += string[keys.length]
+    return `${styleTag}${orig}`
+}
+
+/**
+ * `static get observedAttributes` に定義された Attribute をまとめて取る
+ *
+ * @param {HTMLElement} self
+ * @returns {{[key: string]: string|null}}
+ */
+function getSelfAttributes(self) {
+    if ('observedAttributes' in self.constructor) {
+        /** @type {string[]} */
+        // @ts-expect-error
+        const keys = self.constructor.observedAttributes
+        /** @type {{[key: string]: string|null}} */
+        const map = {}
+        for (const key of keys) {
+            map[key] = self.getAttribute(key)
+        }
+        return map
+    } else {
+        return {}
+    }
+}
+
+/**
+ * render() または mutate() を呼び出す。`connectedCallback` が呼ばれた後に実行すること。
+ *
+ * @template P
+ * @template {HTMLElement & ({ render: (args: P) => string } | { mutate: (args: P, prev: ShadowRoot) => void})} T
+ * @param {T} self
+ * @param {P} props
+ */
+function renderElement(self, props, force = false) {
+    if (!self.isConnected) {
+        return
+    }
+    if (!self.shadowRoot) {
+        return
+    }
+
+    // @ts-expect-error
+    const prevProps = self.__previousRenderProps
+    let needRerender = false
+    if (prevProps) {
+        // @ts-expect-error
+        for (let i = 0; i < props.length; i += 1) {
+            if (prevProps[i] !== props[i]) {
+                needRerender = true
+                break
+            }
+        }
+    } else {
+        needRerender = true
+    }
+    if (force) {
+        needRerender = true
+    }
+
+    if (needRerender && 'render' in self) {
+        self.shadowRoot.innerHTML = self.render(props)
+    } else if (needRerender && 'mutate' in self) {
+        self.mutate(props, self.shadowRoot)
+    }
+    // @ts-expect-error
+    self.__previousRenderProps = props
+}

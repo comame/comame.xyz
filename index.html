@@ -1,18 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dist/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="dist/style.css" />
     <title>comame</title>
 </head>
 
-<body class="h-screen bg-gradient-to-b from-background1 to-background2 from-50% via-[74%] to-[95%] p-16">
-    <div class="h-64 w-64 rounded-16 bg-background4 text-center text-text3">A</div>
-    <footer class="fixed bottom-0 left-0 w-full text-center text-text2 leading-8">© comame</footer>
-
+<body
+    class="min-h-screen bg-gradient-to-b from-background1 to-background2 from-50% via-[74%] to-[95%] p-16 md:p-40 relative">
     <script src="./app.js"></script>
+
+    <div class="flex gap-16 md:gap-40 flex-wrap">
+        <c-grid-item type="image" image-url="./assets/img/profile-rect.png" title="comame" link="#"></c-grid-item>
+        <c-grid-item type="icon" icon-url="./assets/img/pixiv-logo.png" title="pixiv"
+            link="https://www.pixiv.net/users/16791577"></c-grid-item>
+        <c-grid-item type="image" image-url="./assets/img/ika.png" title="illusts"
+            link="https://www.pixiv.net/artworks/110012977" wide></c-grid-item>
+        <c-grid-item type="icon" icon-url="./assets/img/github-mark.png" title="GitHub" link="https://github.com/comame"
+            dark-text></c-grid-item>
+        <c-grid-item type="image" image-url="./assets/img/blog2.png" title="Blog" link="https://blog.comame.xyz"
+            dark-text wide></c-grid-item>
+    </div>
+
+    <footer class="absolute bottom-0 left-0 w-full text-center text-text2 leading-8">
+        © comame
+    </footer>
 </body>
 
 </html>
