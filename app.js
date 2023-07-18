@@ -187,6 +187,7 @@ function getSelfAttributes(self) {
         }
         return map
     } else {
+        console.warn('missing observedAttributes')
         return {}
     }
 }
