@@ -20,6 +20,15 @@ class GridItem extends HTMLElement {
         this.addEventListener('focusout', () => {
             renderElement(this, [false])
         })
+        this.addEventListener('touchstart', () => {
+            renderElement(this, [true])
+        })
+        this.addEventListener('touchmove', () => {
+            renderElement(this, [false])
+        })
+        this.addEventListener('touchend', () => {
+            renderElement(this, [false])
+        })
     }
 
     static observedAttributes = [
