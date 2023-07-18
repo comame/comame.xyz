@@ -34,9 +34,9 @@ class GridItem extends HTMLElement {
 
     /**
      * @param {boolean[]} params
-     * @returns {string}
+     * @returns {Promise<string>}
      */
-    render(params) {
+    async render(params) {
         const [hover] = params
 
         const attrs = getSelfAttributes(this)
@@ -54,13 +54,13 @@ class GridItem extends HTMLElement {
             }
 
             if (!hover) {
-                return themed`
+                return await themed`
                     <a class='h-168 w-168 rounded-16 bg-background4 inline-flex items-center justify-center data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
                         <img class='h-64 w-64' src='${icon}'>
                     </a>
                 `
             }
-            return themed`
+            return await themed`
                 <a class='h-168 w-168 rounded-16 bg-background4 inline-flex items-center justify-center data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
                     <img class='h-64 w-64 blur-sm contrast-50' src='${icon}'>
                     <div class='text-text2 font-bold text-lg absolute data-[dark]:text-text3 text-center' ${isDarkText ? 'data-dark' : ''}>${title}</div>
@@ -76,13 +76,13 @@ class GridItem extends HTMLElement {
             }
 
             if (!hover) {
-                return themed`
+                return await themed`
                     <a class='inline-block h-168 w-168 rounded-16 bg-background4 relative data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
                         <div class='h-full w-full rounded-16' style='background: center / cover no-repeat url(${image})'></div>
                     </a>
                 `
             }
-            return themed`
+            return await themed`
                 <a class='inline-block h-168 w-168 rounded-16 bg-background4 relative data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
                     <div class='h-full w-full rounded-16 blur-sm contrast-50' style='background: center / cover no-repeat url(${image})'></div>
                     <div class='text-text2 font-bold text-lg absolute text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 data-[dark]:text-text3' ${isDarkText ? 'data-dark' : ''}>${title}</div>
@@ -128,13 +128,37 @@ function removeSlotChange(id) {
  *
  * @param {TemplateStringsArray} string
  * @param {...string} keys
- * @returns {string}
+ * @returns {Promise<string>}
  */
-function themed(string, ...keys) {
+async function themed(string, ...keys) {
+    /**
+     * @param {string} url
+     * @returns {Promise<string>}
+     */
+    function cacheFetchText(url) {
+        /** @type {Map<string, Promise<string>>} */
+        // @ts-expect-error
+        let map = window.__cachemap
+        if (!map) {
+            // @ts-expect-error
+            window.__cachemap = new Map()
+            // @ts-expect-error
+            map = window.__cachemap
+        }
+
+        if (map.has(url)) {
+            // @ts-expect-error
+            return map.get(url)
+        }
+        const prom = fetch(url).then(res => res.text())
+        map.set(url, prom)
+        return prom
+    }
+
     /**
      * @param {string} css
      */
-    function __getThemeTag(css) {
+    async function __getThemeTag(css) {
         /** @type {HTMLTemplateElement} */
         // @ts-expect-error
         let template = document.getElementById('__style')
@@ -147,18 +171,16 @@ function themed(string, ...keys) {
 
 
         if (!template.textContent) {
-            fetch(css)
-                .then(res => res.text())
+            await cacheFetchText(css)
                 .then(css => {
                     template.textContent = css
                 })
-            return `<link rel='stylesheet' href='${css}'>`
         }
 
         return `<style>${template.textContent}</style>`
     }
 
-    const styleTag = __getThemeTag('/dist/style.css')
+    const styleTag = await __getThemeTag('/dist/style.css')
 
     let orig = ''
     for (let i = 0; i < keys.length; i += 1) {
@@ -196,11 +218,11 @@ function getSelfAttributes(self) {
  * render() または mutate() を呼び出す。`connectedCallback` が呼ばれた後に実行すること。
  *
  * @template P
- * @template {HTMLElement & ({ render: (args: P) => string } | { mutate: (args: P, prev: ShadowRoot) => void})} T
+ * @template {HTMLElement & ({ render: (args: P) => Promise<string> } | { mutate: (args: P, prev: ShadowRoot) => void})} T
  * @param {T} self
  * @param {P} props
  */
-function renderElement(self, props, force = false) {
+async function renderElement(self, props, force = false) {
     if (!self.isConnected) {
         return
     }
@@ -227,7 +249,7 @@ function renderElement(self, props, force = false) {
     }
 
     if (needRerender && 'render' in self) {
-        self.shadowRoot.innerHTML = self.render(props)
+        self.shadowRoot.innerHTML = await self.render(props)
     } else if (needRerender && 'mutate' in self) {
         self.mutate(props, self.shadowRoot)
     }
