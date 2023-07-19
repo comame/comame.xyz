@@ -7,28 +7,7 @@ class GridItem extends HTMLElement {
     }
 
     connectedCallback() {
-        renderElement(this, [false])
-        this.addEventListener('mouseover', () => {
-            renderElement(this, [true])
-        })
-        this.addEventListener('mouseleave', () => {
-            renderElement(this, [false])
-        })
-        this.addEventListener('focusin', () => {
-            renderElement(this, [true])
-        })
-        this.addEventListener('focusout', () => {
-            renderElement(this, [false])
-        })
-        this.addEventListener('touchstart', () => {
-            renderElement(this, [true])
-        })
-        this.addEventListener('touchmove', () => {
-            renderElement(this, [false])
-        })
-        this.addEventListener('touchend', () => {
-            renderElement(this, [false])
-        })
+        renderElement(this, undefined)
     }
 
     static observedAttributes = [
@@ -38,19 +17,15 @@ class GridItem extends HTMLElement {
         'image-url',
         'link',
         'dark-text',
-        'wide'
+        'wide',
     ]
 
     /**
-     * @param {boolean[]} params
      * @returns {Promise<string>}
      */
-    async render(params) {
-        const [hover] = params
-
+    async render() {
         const attrs = getSelfAttributes(this)
 
-        const isDarkText = attrs['dark-text'] !== null
         const isWide = attrs['wide'] !== null
 
         if (attrs.type === 'icon') {
@@ -62,17 +37,14 @@ class GridItem extends HTMLElement {
                 throw new TypeError('missing attributes')
             }
 
-            if (!hover) {
-                return await themed`
-                    <a class='h-168 w-168 rounded-16 bg-background4 inline-flex items-center justify-center data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
-                        <img class='h-64 w-64' src='${icon}'>
-                    </a>
-                `
-            }
             return await themed`
-                <a class='h-168 w-168 rounded-16 bg-background4 inline-flex items-center justify-center data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
-                    <img class='h-64 w-64 blur-sm contrast-50' src='${icon}'>
-                    <div class='text-text2 font-bold text-lg absolute data-[dark]:text-text3 text-center' ${isDarkText ? 'data-dark' : ''}>${title}</div>
+                <a href='${url}'>
+                    <div class='h-168 w-168 rounded-16 bg-background4 inline-flex items-center justify-center data-[wide]:w-[376px]' ${
+                        isWide ? 'data-wide' : ''
+                    }>
+                        <img class='h-64 w-64' src='${icon}'>
+                    </div>
+                    <p class='text-text2 font-bold text-lg mt-8 text-center'>${title}</p>
                 </a>
             `
         } else if (attrs.type === 'image') {
@@ -84,17 +56,14 @@ class GridItem extends HTMLElement {
                 throw new TypeError('missing attributes')
             }
 
-            if (!hover) {
-                return await themed`
-                    <a class='inline-block h-168 w-168 rounded-16 bg-background4 relative data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
-                        <div class='h-full w-full rounded-16' style='background: center / cover no-repeat url(${image})'></div>
-                    </a>
-                `
-            }
             return await themed`
-                <a class='inline-block h-168 w-168 rounded-16 bg-background4 relative data-[wide]:w-[376px]' href='${url}' ${isWide ? 'data-wide' : ''}>
-                    <div class='h-full w-full rounded-16 blur-sm contrast-50' style='background: center / cover no-repeat url(${image})'></div>
-                    <div class='text-text2 font-bold text-lg absolute text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 data-[dark]:text-text3' ${isDarkText ? 'data-dark' : ''}>${title}</div>
+                <a href='${url}'>
+                    <div class='inline-block h-168 w-168 rounded-16 bg-background4 relative data-[wide]:w-[376px]' ${
+                        isWide ? 'data-wide' : ''
+                    }>
+                        <div class='h-full w-full rounded-16' style='background: center / cover no-repeat url(${image})'></div>
+                        <p class='text-text2 font-bold text-lg mt-8 text-center'>${title}</p>
+                    </div>
                 </a>
             `
         } else {
@@ -159,7 +128,7 @@ async function themed(string, ...keys) {
             // @ts-expect-error
             return map.get(url)
         }
-        const prom = fetch(url).then(res => res.text())
+        const prom = fetch(url).then((res) => res.text())
         map.set(url, prom)
         return prom
     }
@@ -178,12 +147,10 @@ async function themed(string, ...keys) {
             template = el
         }
 
-
         if (!template.textContent) {
-            await cacheFetchText(css)
-                .then(css => {
-                    template.textContent = css
-                })
+            await cacheFetchText(css).then((css) => {
+                template.textContent = css
+            })
         }
 
         return `<style>${template.textContent}</style>`
