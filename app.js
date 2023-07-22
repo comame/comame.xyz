@@ -39,8 +39,9 @@ class GridItem extends HTMLElement {
 
             return await themed`
                 <a href='${url}'>
-                    <div class='h-168 w-168 rounded-16 bg-background4 inline-flex items-center justify-center data-[wide]:w-[352px] md:data-[wide]:w-[376px] ' ${isWide ? 'data-wide' : ''
-                }>
+                    <div class='h-168 w-168 rounded-16 bg-background4 inline-flex items-center justify-center data-[wide]:w-[352px] md:data-[wide]:w-[376px] ' ${
+                        isWide ? 'data-wide' : ''
+                    }>
                         <img class='h-64 w-64' src='${icon}'>
                     </div>
                     <p class='text-text2 font-bold text-lg pt-8 text-center'>${title}</p>
@@ -57,8 +58,9 @@ class GridItem extends HTMLElement {
 
             return await themed`
                 <a href='${url}'>
-                    <div class='inline-block h-168 w-168 rounded-16 bg-background4 relative data-[wide]:w-[352px] md:data-[wide]:w-[376px]' ${isWide ? 'data-wide' : ''
-                }>
+                    <div class='inline-block h-168 w-168 rounded-16 bg-background4 relative data-[wide]:w-[352px] md:data-[wide]:w-[376px]' ${
+                        isWide ? 'data-wide' : ''
+                    }>
                         <div class='h-full w-full rounded-16' style='background: center / cover no-repeat url(${image})'></div>
                         <p class='text-text2 font-bold text-lg pt-8 text-center'>${title}</p>
                     </div>
