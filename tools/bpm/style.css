@@ -1,0 +1,55 @@
+:root {
+    --color-background: #0d0d0d;
+    --color-surface: #222222;
+    --color-tap: #42ba07;
+    --color-text: #efefef;
+
+    --color-tap_hover: hsl(100, 93%, 30%);
+    --color-surface_hover: hsl(0, 0%, 10%);
+
+    --color-tap_active: hsl(100, 93%, 25%);
+    --color-surface_active: hsl(0, 0%, 5%);
+}
+
+html {
+    background-color: var(--color-background);
+}
+
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+#beat {
+    color: var(--color-text);
+    font-size: 1.5em;
+}
+
+#tap {
+    height: 120px;
+    width: 120px;
+
+    font-size: 1.2em;
+
+    border-radius: 100%;
+    font-weight: bold;
+
+    color: var(--color-tap);
+    background-color: var(--color-surface);
+    border: solid var(--color-tap) 3px;
+
+    &:hover {
+        color: var(--color-tap_hover);
+        background-color: var(--color-surface_hover);
+        border-color: var(--color-tap_hover);
+    }
+
+    &:active {
+        color: var(--color-tap_active);
+        background-color: var(--color-surface_active);
+        border-color: var(--color-tap_active);
+    }
+}
