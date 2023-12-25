@@ -1,0 +1,150 @@
+:root {
+    --color-background1: #0d0d0d;
+    --color-background2: #202020;
+    --color-background3: #373737;
+    --color-background4: #606060;
+    --color-background5: #777777;
+
+    --color-white1: #efefef;
+    --color-white2: #989898;
+
+    --color-green: hsl(100, 93%, 38%);
+    --color-red: hsl(12, 90%, 45%);
+    --color-blue: hsl(207, 96%, 45%);
+}
+
+* {
+    box-sizing: border-box !important;
+    font-size: 24px;
+}
+
+html {
+    background-color: var(--color-background1);
+}
+
+body {
+    min-height: 90vh;
+}
+
+/* ボタン */
+button {
+    color: var(--color-white1);
+    background-color: var(--color-background5);
+    border: var(--color-white1) solid 1px;
+
+    &:disabled {
+        color: var(--color-white2);
+        background-color: var(--color-background3);
+        border-color: var(--color-white2);
+    }
+
+    /* :active を使わない理由は addClickEventListener() を参照 */
+    &.active {
+        color: var(--color-background1);
+        background-color: var(--color-white1);
+        border-color: var(--color-white1);
+    }
+}
+
+button#start-button {
+    color: var(--color-white1);
+    background-color: var(--color-blue);
+    border: none;
+
+    &.paused {
+        color: var(--color-white1);
+        background-color: var(--color-background5);
+        border: var(--color-white1) solid 1px;
+    }
+}
+
+/* ディスプレイ部の文字サイズ */
+.display {
+    & > *:nth-child(1) {
+        font-size: 2em;
+    }
+
+    & > *:nth-child(2) {
+        font-size: 0.8em;
+    }
+
+    & > *:nth-child(3) {
+        font-size: 1.5em;
+        vertical-align: text-bottom;
+    }
+
+    & > *:nth-child(4) {
+        font-size: 2em;
+    }
+
+    & > *:nth-child(5) {
+        font-size: 0.8em;
+    }
+
+    & > *:nth-child(6) {
+        font-size: 1em;
+    }
+
+    & > *:nth-child(7) {
+        font-size: 1em;
+    }
+
+    & > *:nth-child(8) {
+        font-size: 0.8em;
+    }
+}
+
+/* レイアウト */
+body {
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 0 16px;
+        height: 3.5em;
+        width: calc(500px + 16px * 2);
+
+        .display {
+            display: inline-block;
+            width: 300px;
+            color: var(--color-white1);
+        }
+
+        #start-button {
+            display: inline-block;
+            height: 42px;
+            width: calc(500px - 300px - 16px);
+            vertical-align: super;
+        }
+    }
+
+    .keys {
+        background-color: var(--color-background2);
+        padding: 16px;
+        width: calc(500px + 16px);
+
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 16px;
+
+        .num-keys {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) 1.5fr;
+            grid-template-rows: repeat(4, 42px);
+            gap: 8px;
+
+            #button-0 {
+                grid-column: 1 / 4;
+            }
+        }
+
+        .other-keys {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(2, 42px);
+            gap: 8px;
+        }
+    }
+}
