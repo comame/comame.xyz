@@ -1,3 +1,8 @@
+// TODO: リロードやスロットリングに影響を受けないようにする
+// TODO: 残り時間表示バー
+// TODO: 5分以下で赤表示
+// TODO: Wake Lock
+
 // ディスプレイ部
 const displayHours = document.getElementById('display-hours')
 const displayMinutes = document.getElementById('display-minutes')
@@ -106,7 +111,6 @@ function inputTimeToSeconds() {
 }
 
 // 分数プラマイ制御
-// TODO: スタート後なら別制御が必要
 /**
  * @param {number} minutes
  */
@@ -196,6 +200,7 @@ function start() {
         const h = Math.trunc(rest / 3600)
 
         if (rest <= 0) {
+            pause()
             handleClear()
             return
         }
@@ -251,28 +256,31 @@ function handleClear() {
 addClickEventListener(buttonClear, handleClear)
 
 /**
- * タッチデバイスでは touchstart を取るようにするためのワークアラウンド
- *
  * @param {HTMLElement|null} target
  * @param {() => void} f
  */
 function addClickEventListener(target, f) {
-    if ('ontouchstart' in window) {
-        target.addEventListener('touchstart', () => {
-            // タッチデバイスだと :active が遅延するのを防ぐ
-            target.classList.add('active')
-            f()
-        })
-        target.addEventListener('touchend', () => {
-            target.classList.remove('active')
-        })
-    } else {
-        target.addEventListener('mousedown', () => {
-            target.classList.add('active')
-            f()
-        })
-        target.addEventListener('mouseup', () => {
-            target.classList.remove('active')
-        })
-    }
+    target.addEventListener('touchstart', (e) => {
+        if (target.disabled) {
+            return
+        }
+        // mousedown が発火しないようにする
+        e.preventDefault()
+        // タッチデバイスだと :active が遅延するのを防ぐ
+        target.classList.add('active')
+        f()
+    })
+    target.addEventListener('mousedown', () => {
+        if (target.disabled) {
+            return
+        }
+        target.classList.add('active')
+        f()
+    })
+    target.addEventListener('touchend', () => {
+        target.classList.remove('active')
+    })
+    target.addEventListener('mouseup', () => {
+        target.classList.remove('active')
+    })
 }

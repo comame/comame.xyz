@@ -66,7 +66,15 @@ function click() {
     }, 2 * 1000)
 }
 
-tapButton.addEventListener('click', click)
+tapButton.addEventListener('touchstart', (e) => {
+    // タッチデバイスでは click イベントを発火させないようにする
+    e.preventDefault()
+    click()
+})
+tapButton.addEventListener('click', () => {
+    click()
+})
+
 window.addEventListener('keydown', (e) => {
     if (e.code !== 'Space') {
         return
