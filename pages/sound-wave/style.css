@@ -1,0 +1,20 @@
+#parent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(195, 195, 195);
+    height: 100px;
+    width: fit-content;
+}
+
+.wave-element {
+    width: 3px;
+    margin-right: 1px;
+
+    &.active {
+        background-color: rgb(35, 106, 199);
+    }
+    &.inactive {
+        background-color: rgb(118, 172, 244);
+    }
+}
